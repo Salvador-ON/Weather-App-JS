@@ -20,98 +20,116 @@
       </a>
 
       <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="City" aria-label="Search">
-        <button class="btn btn btn-light my-2 my-sm-0 mr-1" type="button">Celsius</button>
-        <button class="btn btn btn-light my-2 my-sm-0 mx-1" type="button">Farenheit</button>
+        <input class="form-control mr-sm-2" type="search" placeholder="City" aria-label="Search" id="cityInput">
+        <button class="btn btn btn-light my-2 my-sm-0 mr-1" type="button" id="celsius">Celsius</button>
+        <button class="btn btn btn-light my-2 my-sm-0 mx-1" type="button" id="farenheit">Farenheit</button>
       </form>
     </nav>
 
+    <div id="errorMessage"></div>
+
     <div id="clouds">
       <div class="cloud x1"></div>
-      <!-- Time for multiple clouds to dance around -->
       <div class="cloud x2"></div>
       <div class="cloud x3"></div>
-      <div class="cloud x4"></div>
-      <div class="cloud x5"></div>
     </div>
 
-    <div class= "welcome">
+    <div id="dataDisplay"></div>
+
+    <div class= "welcome w-100" id="welcomeCont">
       <h1 class="display-1 text-white text-center font-weight-bold">Welcome to</h1>
       <h1 class="display-1 text-white text-center font-weight-bold">How is the weather?</h1>
     </div>
-    
 
-    <!-- <div class="container mt-4">
-      <div class="row d-flex justify-content-between ">
-        <div class="col-5 bg-grey rounded shadow-lg px-4 pt-4 pb-4">
-          <h6 class="h2 border-bottom border-secondary">Salta</h6>
-          <div class="d-flex justify-content-between border-bottom border-secondary"><span class="h5">Junio 10</span>
-            <span class="h5">7:00AM</span></div>
-          <div class="row mx-0 d-flex justify-content-between mt-2  border-bottom border-secondary pb-2">
-            <div class="col-5 text-center">
-              <i class="fas fa-sun text-warning fa-5x"></i>
-              <h5 class="h5">Sunny</h5>
+
+
+    <template id="displayTemplate">
+      <div class="container mt-4 d-flex justify-content-center info" id="">
+        <div class="row d-flex justify-content-between ">
+          <div class="col-6 bg-grey rounded shadow-lg px-4 pt-4 pb-4">
+            <h6 class="h2 border-bottom border-secondary" id="cityName">Salta</h6>
+            <div class="d-flex justify-content-between border-bottom border-secondary"><span class="h5" id="currentDate">Junio
+                10</span>
+              <span class="h5" id="currentHour">7:00AM</span></div>
+            <div class="row mx-0 d-flex justify-content-between mt-2  border-bottom border-secondary pb-2">
+              <div class="col-5 text-center">
+                <i class="fas fa-sun text-warning fa-5x" id="iconMain"></i>
+                <h5 class="h5" id="mainDescription">Sunny</h5>
+              </div>
+              <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                <h2 class="display-4 p-0 m-0" id="temperature">25°C</h2>
+                <h2 class="h6 p-0 m-0">Feels like: <span class="h6" id="sensation">20°C</span></h2>
+              </div>
             </div>
-            <div class="col-6 d-flex flex-column justify-content-center align-items-center">
-              <h2 class="display-4 p-0 m-0">25°C</h2>
-              <h2 class="h6 p-0 m-0">Feels like: <span class="h6">20°C</span></h2>
+            <div class="mt-2 pb-1 border-bottom border-secondary">
+              <i class="fas fa-water text-dark h5 mr-2"></i><span class="h5">Humidity: </span><span class="h5"
+                id="humidity">70%</span>
+            </div>
+            <div class="mt-2 border-bottom border-secondary">
+              <i class="fas fa-temperature-low text-primary h5 mr-2"></i><span class="h5">Min Temperature: </span><span
+                class="h5" id="minTEmp"> 2°C</span>
+            </div>
+            <div class="mt-2  border-bottom border-secondary">
+              <i class="fas fa-temperature-high text-danger h5 mr-2"></i><span class="h5">Max Temperature: </span><span
+                class="h5" id="maxTemp"> 22°C</span>
+            </div>
+            <div class="mt-2  border-bottom border-secondary">
+              <i class="fas fa-compass text-dark h5 mr-2"></i>
+              <span class="h5">Coordinates: </span>
+              <span class="h5">Long:</span>
+              <span class="h5 mr-2" id="longInfo">-65.41</span>
+              <span class="h5">Lat:</span>
+              <span class="h5" id="latInfo">-24.79</span>
             </div>
           </div>
-          <div class="mt-2 pb-1 border-bottom border-secondary">
-            <i class="fas fa-water text-dark h5 mr-2"></i><span class="h5">Humidity: </span><span class="h5"> 70%</span>
-          </div>
-          <div class="mt-2 border-bottom border-secondary">
-            <i class="fas fa-temperature-low text-primary h5 mr-2"></i><span class="h5">Min Temperature: </span><span
-              class="h5"> 2°C</span>
-          </div>
-          <div class="mt-2  border-bottom border-secondary">
-            <i class="fas fa-temperature-high text-danger h5 mr-2"></i><span class="h5">Max Temperature: </span><span
-              class="h5"> 22°C</span>
-          </div>
-          <div class="mt-2  border-bottom border-secondary">
-            <i class="fas fa-compass text-dark h5 mr-2"></i>
-            <span class="h5">Coordinates: </span>
-            <span class="h5">Long:</span>
-            <span class="h5 mr-2">-65.41</span>
-            <span class="h5">Lat:</span>
-            <span class="h5">-24.79</span>
+      
+          <div class="col-6 px-4">
+            <div class="row bg-grey shadow-lg mr-2 rounded py-2">
+              <div class="col-12 text-center h4">Day Lenght</div>
+              <div class="col-6 text-center ">
+                <img src="./assets/media/rise.svg" alt="sunrise" width="100" height="100" class="svg-sunrise">
+                <h5 class="h5" id="sunrise">7:00</h5>
+                <h5 class="h6">Sunrise</h5>
+              </div>
+              <div class="col-6 text-center">
+                <img src="./assets/media/set.svg" alt="sunrise" width="100" height="100">
+                <h5 class="h5" id="sunset">18:00</h5>
+                <h5 class="h6">Sunset</h5>
+              </div>
+            </div>
+      
+      
+      
+            <div class="row bg-grey shadow-lg mr-2 rounded mt-3 py-2">
+              <div class="col-12 text-center h4 py-2">Wind</div>
+              <div class="col-6 text-center">
+                <i class="fas fa-wind fa-5x text-dark"></i>
+                <h5 class="h5" id="windSpeed">17 KM/H</h5>
+                <h5 class="h6">Speed</h5>
+              </div>
+              <div class="col-6 text-center">
+                <i class="fas fa-location-arrow fa-5x text-dark"></i>
+                <h5 class="h5" id="windDirection">90°</h5>
+                <h5 class="h6">Direction</h5>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="col-6 px-4">
-          <div class="row bg-grey shadow-lg mr-2 rounded py-2">
-            <div class="col-12 text-center h4">Day Lenght</div>
-            <div class="col-6 text-center ">
-              <img src="./assets/media/rise.svg" alt="sunrise" width="100" height="100" class="svg-sunrise">
-              <h5 class="h5">7:00</h5>
-              <h5 class="h6">Sunrise</h5>
-            </div>
-            <div class="col-6 text-center">
-              <img src="./assets/media/set.svg" alt="sunrise" width="100" height="100">
-              <h5 class="h5">18:00</h5>
-              <h5 class="h6">Sunset</h5>
-            </div>
-          </div>
-
-
-
-          <div class="row bg-grey shadow-lg mr-2 rounded mt-3 py-2">
-            <div class="col-12 text-center h4 py-2">Wind</div>
-            <div class="col-6 text-center">
-              <i class="fas fa-wind fa-5x text-dark"></i>
-              <h5 class="h5">17 KM/H</h5>
-              <h5 class="h6">Speed</h5>
-            </div>
-            <div class="col-6 text-center">
-              <i class="fas fa-location-arrow fa-5x text-dark"></i>
-              <h5 class="h5">90°</h5>
-              <h5 class="h6">Direction</h5>
-            </div>
-          </div>
-        </div>
+      
       </div>
+    </template>
 
-    </div> -->
+
+  <template id="errorTemplate">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Error</strong> <span id="message"></span>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </template>
+
+    
 
   </div>
 
