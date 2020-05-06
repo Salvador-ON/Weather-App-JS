@@ -91,21 +91,21 @@
 const checkWeather = (system, city) => {
   fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${system}&appid=0747aa2b81c66ff632767f1576af3d12`, { mode: 'cors' })
     .then(function (response) {
+      if (response.status !== 200) {
+        throw new Error();
+      }
       return response.json();
     })
     .then(function (response) {
-      if (response.status !== 404) {
-        removeWelcome();
-        displayData();
-        console.log('good', response);
-      } else
-      {
-        errorMessage("City doesn't exist in the database")
-      }
-      
+
+      removeWelcome();
+      displayData();
+      console.log('good', response);
+    }
+
       // console.log(response.main.temp);
-    }).catch(function (err) {
-      console.log(err) 
+    ).catch(function (err) {
+      errorMessage("City doesn't exist in the database")
     });
 }
 
