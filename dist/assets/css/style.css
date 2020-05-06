@@ -1,5 +1,5 @@
 .full-cont {
-  height: 100vh;
+  min-height: 100vh;
   background: rgb(18,47,87);
   background: linear-gradient(0deg, rgba(18,47,87,1) 0%, rgba(36,100,167,1) 50%, rgba(57,157,230,1) 100%);
 }
