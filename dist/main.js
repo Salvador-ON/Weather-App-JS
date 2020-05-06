@@ -89,7 +89,7 @@
 /***/ (function(module, exports) {
 
 const checkWeather = (system, city) => {
-  fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${system}&appid=0747aa2b81c66ff632767f1576af3d12`, { mode: 'cors' })
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${system}&appid=0747aa2b81c66ff632767f1576af3d12`, { mode: 'cors' })
     .then(function (response) {
       if (response.status === 404) {
         throw new Error();
@@ -109,7 +109,7 @@ const checkWeather = (system, city) => {
     });
 }
 
-const addListrener = () => {
+const addListener = () => {
   const buttonCelsius = document.getElementById('celsius');
   buttonCelsius.addEventListener('click', () => {
     const cityName = document.getElementById('cityInput').value;
@@ -190,7 +190,7 @@ const timeZone = (time) => {
   }
 
 
-addListrener();
+  addListener();
 
 
 
