@@ -52,10 +52,10 @@
             <h6 class="h2 border-bottom border-secondary" id="cityName">Salta</h6>
             <div class="d-flex justify-content-between border-bottom border-secondary"><span class="h5" id="timeZone">Junio
                 10</span>
-              <span class="h5" id="currentHour">7:00AM</span></div>
+              <span class="h5"> Local Hour: <span class="h5" id="currentHour">7:00AM</span></span></div>
             <div class="row mx-0 d-flex justify-content-between mt-2  border-bottom border-secondary pb-2">
               <div class="col-5 text-center">
-                <i class="fas fa-sun text-warning fa-5x" id="iconMain"></i>
+                <img id="iconWeather" class="mx-auto rounded-circle" width="120">
                 <h5 class="h5 text-capitalize" id="mainDescription">Sunny</h5>
               </div>
               <div class="col-6 d-flex flex-column justify-content-center align-items-center">
@@ -78,7 +78,7 @@
             <div class="mt-2  border-bottom border-secondary">
               <i class="fas fa-compass text-dark h5 mr-2"></i>
               <span class="h5">Coordinates: </span>
-              <span class="h5">Long:</span>
+              <span class="h5">Lon:</span>
               <span class="h5 mr-2" id="lonInfo">-65.41</span>
               <span class="h5">Lat:</span>
               <span class="h5" id="latInfo">-24.79</span>
@@ -86,8 +86,8 @@
           </div>
       
           <div class="col-6 px-4">
-            <div class="row bg-grey shadow-lg mr-2 rounded py-2">
-              <div class="col-12 text-center h4">Day Lenght: <span id="duration time">12hr</span></div>
+            <div class="row bg-grey shadow-lg mr-2 rounded py-3">
+              <div class="col-12 text-center h4">Day Lenght: <span id="durationTime">12hr</span></div>
               <div class="col-6 text-center ">
                 <img src="./assets/media/rise.svg" alt="sunrise" width="100" height="100" class="svg-sunrise">
                 <h5 class="h5" id="sunrise">7:00</h5>
@@ -103,7 +103,7 @@
       
       
             <div class="row bg-grey shadow-lg mr-2 rounded mt-3 py-2">
-              <div class="col-12 text-center h4 py-2">Wind</div>
+              <div class="col-12 text-center h4 py-4">Wind</div>
               <div class="col-6 text-center">
                 <i class="fas fa-wind fa-5x text-dark"></i>
                 <h5 class="h5" id="windSpeed">17 KM/H</h5>
