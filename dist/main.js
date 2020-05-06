@@ -103,7 +103,6 @@ const checkWeather = (system, city) => {
 
     }
 
-      // console.log(response.main.temp);
     ).catch(function (err) {
       errorMessage("City doesn't exist in the database")
     });
@@ -157,7 +156,6 @@ const displayData = (response, system) => {
     syst = 'F'
     windSpeed = 'miles/h'
   }
-  console.log(system, response);
   document.getElementById('dataDisplay').innerHTML = "";
   const displayTemplate = document.getElementById('displayTemplate').content;
   let cloneTemplate = displayTemplate.cloneNode(true);
@@ -174,10 +172,12 @@ const displayData = (response, system) => {
   cloneTemplate.getElementById('windDirection').innerHTML = response.wind.deg + '°';
   cloneTemplate.getElementById('timeZone').innerHTML = 'UTC ' + timeZone(response.timezone);
   cloneTemplate.getElementById('currentHour').innerHTML = localTime(timeZone(response.timezone));
-  cloneTemplate.getElementById('sunrise').innerHTML = sunTime(response.sys.sunrise, timeZone(response.timezone));
-  cloneTemplate.getElementById('sunset').innerHTML = sunTime(response.sys.sunset, timeZone(response.timezone));
-
-
+  let sunRise = sunTime(response.sys.sunrise, timeZone(response.timezone));
+  let sunSet = sunTime(response.sys.sunset, timeZone(response.timezone));
+  cloneTemplate.getElementById('sunrise').innerHTML = sunRise;
+  cloneTemplate.getElementById('sunset').innerHTML = sunSet;
+  cloneTemplate.getElementById('durationTime').innerHTML = dayLength(sunRise,sunSet);
+  cloneTemplate.getElementById('iconWeather').src= `./assets/media/icons/${response.weather['0'].icon}.png`
   document.getElementById('dataDisplay').appendChild(cloneTemplate);
 }
 
@@ -194,8 +194,8 @@ const timeZone = (time) => {
 }
 
 const sunTime = (utime, localZone) => {
-  let unix_timestamp = utime;
-  let date = new Date(unix_timestamp * 1000);
+  let unixTimeStamp = utime;
+  let date = new Date(unixTimeStamp * 1000);
   date.setHours(date.getHours()+parseInt(localZone))
   let utcString = date.toUTCString().split(' ')[4];
   let fullHour = utcString.split(':');
@@ -205,6 +205,15 @@ const sunTime = (utime, localZone) => {
   return time;
 }
 
+const dayLength = (sunRise, sunSet) => {
+  let hours = parseInt(sunSet.split(':')[0]) - parseInt(sunRise.split(':')[0]);
+  let minutes =  parseInt(sunSet.split(':')[1]) - parseInt(sunRise.split(':')[1]);
+  if (minutes < 0 ){
+    minutes = 60 + minutes;
+  }
+  let time = hours +  'h ' + minutes +  'm ';
+  return time;
+}
 addListener();
 
 
