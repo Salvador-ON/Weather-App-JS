@@ -25,6 +25,7 @@
 #clouds{
   margin-top: 0px;
   max-width: 100%;
+  min-height: 80vh;
   overflow-x: hidden;
   position: absolute;
 }
@@ -71,7 +72,7 @@
 
 /*variable speed, opacity, and position of clouds for realistic effect*/
 .x2 {
-	left: 200px;
+	left: -300px;
 	
 	-webkit-transform: scale(0.6);
 	-moz-transform: scale(0.6);
@@ -86,7 +87,7 @@
 }
 
 .x3 {
-	left: -250px; top: -200px;
+	left: -250px; top: 200px;
 	
 	-webkit-transform: scale(0.8);
 	-moz-transform: scale(0.8);
@@ -99,7 +100,7 @@
 }
 
 .x4 {
-	left: 470px; top: -250px;
+	left: -100px; top: 40px;
 	
 	-webkit-transform: scale(0.75);
 	-moz-transform: scale(0.75);

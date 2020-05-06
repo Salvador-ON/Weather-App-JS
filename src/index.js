@@ -10,7 +10,7 @@ const checkWeather = (system, city) => {
 
       removeWelcome();
       displayData(response, system);
-      
+
     }
 
       // console.log(response.main.temp);
@@ -59,7 +59,7 @@ const validateInfo = (system, cityName) => {
 const displayData = (response, system) => {
   let syst = '';
   let windSpeed = '';
-  if (system === 'metric'){
+  if (system === 'metric') {
     syst = 'C';
     windSpeed = 'meters/s'
   }
@@ -82,23 +82,38 @@ const displayData = (response, system) => {
   cloneTemplate.getElementById('latInfo').innerHTML = response.coord.lat;
   cloneTemplate.getElementById('windSpeed').innerHTML = response.wind.speed + windSpeed;
   cloneTemplate.getElementById('windDirection').innerHTML = response.wind.deg + '°';
-  cloneTemplate.getElementById('timeZone').innerHTML = 'UTC' + timeZone(response.timezone);
-  // cloneTemplate.getElementById('currentHour').innerHTML = localTime(timeZone(response.timezone));
+  cloneTemplate.getElementById('timeZone').innerHTML = 'UTC ' + timeZone(response.timezone);
+  cloneTemplate.getElementById('currentHour').innerHTML = localTime(timeZone(response.timezone));
+  cloneTemplate.getElementById('sunrise').innerHTML = sunTime(response.sys.sunrise, timeZone(response.timezone));
+  cloneTemplate.getElementById('sunset').innerHTML = sunTime(response.sys.sunset, timeZone(response.timezone));
+
+
   document.getElementById('dataDisplay').appendChild(cloneTemplate);
 }
 
 const localTime = (time) => {
-const date = new Date().toISOString().split("T");
-let hour = date[1].split(":");
-let timeHour = (hour[0]+time)+';'+hour[1]
-return timeHour
+  const date = new Date().toISOString().split("T");
+  let hour = date[1].split(":");
+  let timeHour = (parseInt(hour[0]) + parseInt(time)) + ':' + hour[1]
+  return timeHour
 }
 
 const timeZone = (time) => {
-  
-  return time/3600;
-  }
 
+  return time / 3600;
+}
 
-  addListener();
+const sunTime = (utime, localZone) => {
+  let unix_timestamp = utime;
+  let date = new Date(unix_timestamp * 1000);
+  date.setHours(date.getHours()+parseInt(localZone))
+  let utcString = date.toUTCString().split(' ')[4];
+  let fullHour = utcString.split(':');
+  let hours = fullHour[0]
+  let minutes = fullHour[1]
+  let time = hours +  ':' + minutes;
+  return time;
+}
+
+addListener();
 
