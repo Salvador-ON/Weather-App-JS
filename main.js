@@ -91,7 +91,7 @@
 const checkWeather = (system, city) => {
   fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${system}&appid=0747aa2b81c66ff632767f1576af3d12`, { mode: 'cors' })
     .then(function (response) {
-      if (response.status !== 200) {
+      if (response.status === 404) {
         throw new Error();
       }
       return response.json();
@@ -99,8 +99,8 @@ const checkWeather = (system, city) => {
     .then(function (response) {
 
       removeWelcome();
-      displayData();
-      console.log('good', response);
+      displayData(response, system);
+      
     }
 
       // console.log(response.main.temp);
@@ -146,12 +146,49 @@ const validateInfo = (system, cityName) => {
   }
 }
 
-const displayData = () => {
+const displayData = (response, system) => {
+  let syst = '';
+  let windSpeed = '';
+  if (system === 'metric'){
+    syst = 'C';
+    windSpeed = 'meters/s'
+  }
+  else {
+    syst = 'F'
+    windSpeed = 'miles/h'
+  }
+  console.log(system, response);
   document.getElementById('dataDisplay').innerHTML = "";
   const displayTemplate = document.getElementById('displayTemplate').content;
   let cloneTemplate = displayTemplate.cloneNode(true);
+  cloneTemplate.getElementById('temperature').innerHTML = response.main.temp + '°' + syst;
+  cloneTemplate.getElementById('sensation').innerHTML = response.main.feels_like + '°' + syst;
+  cloneTemplate.getElementById('cityName').innerHTML = response.name;
+  cloneTemplate.getElementById('mainDescription').innerHTML = response.weather['0'].description;
+  cloneTemplate.getElementById('humidity').innerHTML = response.main.temp + '%';
+  cloneTemplate.getElementById('minTemp').innerHTML = response.main.temp_min + '°' + syst;
+  cloneTemplate.getElementById('maxTemp').innerHTML = response.main.temp_max + '°' + syst;
+  cloneTemplate.getElementById('lonInfo').innerHTML = response.coord.lon;
+  cloneTemplate.getElementById('latInfo').innerHTML = response.coord.lat;
+  cloneTemplate.getElementById('windSpeed').innerHTML = response.wind.speed + windSpeed;
+  cloneTemplate.getElementById('windDirection').innerHTML = response.wind.deg + '°';
+  cloneTemplate.getElementById('timeZone').innerHTML = 'UTC' + timeZone(response.timezone);
+  // cloneTemplate.getElementById('currentHour').innerHTML = localTime(timeZone(response.timezone));
   document.getElementById('dataDisplay').appendChild(cloneTemplate);
 }
+
+const localTime = (time) => {
+const date = new Date().toISOString().split("T");
+let hour = date[1].split(":");
+let timeHour = (hour[0]+time)+';'+hour[1]
+return timeHour
+}
+
+const timeZone = (time) => {
+  
+  return time/3600;
+  }
+
 
 addListrener();
 
