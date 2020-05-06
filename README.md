@@ -4,6 +4,15 @@ A Simple Weather-App with html and js .
 
 [Click To Check The Project Details](https://www.theodinproject.com/courses/javascript/lessons/weather-app)
 
+## ScreenShots
+
+![](./dist/assets/media/weather-devises.PNG)
+![](./dist/assets/media/app.gif)
+
+## Live Version
+
+Live version [here](https://salvador-on.github.io/Weather-App-JS/).
+
 ## Author
 
 **Salvador Olvera**
@@ -36,11 +45,5 @@ Open your git bash and cd to the location you'd like to put your files the run t
 git clone https://github.com/Salvador-ON/Weather-App-JS.git
 ```
 
-## Live Version
 
-Live version [here](https://salvador-on.github.io/Weather-App-JS/).
 
-## ScreenShots
-
-![list books](./dist/imgs/todolist.png)
-![list books](./dist/assets/media/app.gif)
