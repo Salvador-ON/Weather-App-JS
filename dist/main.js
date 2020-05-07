@@ -96,7 +96,12 @@ __webpack_require__.r(__webpack_exports__);
 const localTime = (time) => {
   const date = new Date().toISOString().split('T');
   const hour = date[1].split(':');
-  const timeHour = `${parseInt(hour[0], 10) + parseInt(time, 10)}:${hour[1]}`;
+  let realHour = parseInt(hour[0], 10) + parseInt(time, 10);
+  if (realHour < 0) {
+    realHour = 24 + realHour;
+  }
+
+  const timeHour = `${realHour}:${hour[1]}`;
   return timeHour;
 };
 
