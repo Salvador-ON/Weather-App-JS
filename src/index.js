@@ -2,9 +2,8 @@ import * as domMan from './domManipulation';
 
 const toggleClick = () => {
   document.getElementById('imperialSystem').addEventListener('click', () => {
+    // eslint-disable-next-line no-use-before-define
     toggleSystem();
-  // const cityName = document.getElementById('cityInput').value;
-  // validateInfo('imperial', cityName);
   });
 };
 
