@@ -1,14 +1,18 @@
 import * as infoMan from './infoManipulation';
 
+
 export const displayData = (response, system) => {
   let syst = '';
   let windSpeed = '';
+  let boolSystem = false;
   if (system === 'metric') {
     syst = 'C';
     windSpeed = 'meters/s';
+    boolSystem = false;
   } else {
     syst = 'F';
     windSpeed = 'miles/h';
+    boolSystem = true;
   }
   document.getElementById('dataDisplay').innerHTML = '';
   const displayTemplate = document.getElementById('displayTemplate').content;
@@ -32,6 +36,7 @@ export const displayData = (response, system) => {
   cloneTemplate.getElementById('sunset').innerHTML = sunSet;
   cloneTemplate.getElementById('durationTime').innerHTML = infoMan.dayLength(sunRise, sunSet);
   cloneTemplate.getElementById('iconWeather').src = `./assets/media/icons/${response.weather['0'].icon}.png`;
+  cloneTemplate.getElementById('imperialSystem').checked = boolSystem;
   document.getElementById('dataDisplay').appendChild(cloneTemplate);
 };
 

@@ -131,15 +131,19 @@ const dayLength = (sunRise, sunSet) => {
 // CONCATENATED MODULE: ./src/domManipulation.js
 
 
+
 const displayData = (response, system) => {
   let syst = '';
   let windSpeed = '';
+  let boolSystem = false;
   if (system === 'metric') {
     syst = 'C';
     windSpeed = 'meters/s';
+    boolSystem = false;
   } else {
     syst = 'F';
     windSpeed = 'miles/h';
+    boolSystem = true;
   }
   document.getElementById('dataDisplay').innerHTML = '';
   const displayTemplate = document.getElementById('displayTemplate').content;
@@ -163,6 +167,7 @@ const displayData = (response, system) => {
   cloneTemplate.getElementById('sunset').innerHTML = sunSet;
   cloneTemplate.getElementById('durationTime').innerHTML = dayLength(sunRise, sunSet);
   cloneTemplate.getElementById('iconWeather').src = `./assets/media/icons/${response.weather['0'].icon}.png`;
+  cloneTemplate.getElementById('imperialSystem').checked = boolSystem;
   document.getElementById('dataDisplay').appendChild(cloneTemplate);
 };
 
@@ -181,21 +186,30 @@ const errorMessage = (message) => {
 // CONCATENATED MODULE: ./src/index.js
 
 
-const checkWeather = (system, city) => {
-  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${system}&appid=0747aa2b81c66ff632767f1576af3d12`, { mode: 'cors' })
-    .then((response) => {
-      if (response.status === 404) {
-        throw new Error();
-      }
-      return response.json();
-    })
-    .then((response) => {
+const toggleClick = () => {
+  document.getElementById('imperialSystem').addEventListener('click', () => {
+    toggleSystem();
+  // const cityName = document.getElementById('cityInput').value;
+  // validateInfo('imperial', cityName);
+  });
+};
+
+
+async function checkWeather(system, city) {
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${system}&appid=0747aa2b81c66ff632767f1576af3d12`, { mode: 'cors' });
+
+  response.json().then((response) => {
+    if (response.cod === 200) {
       removeWelcome();
       displayData(response, system);
-    }).catch(() => {
+      toggleClick();
+    } else {
       errorMessage("City doesn't exist in the database");
-    });
-};
+    }
+  }).catch(() => {
+    errorMessage("City doesn't exist in the database");
+  });
+}
 
 const validateInfo = (system, cityName) => {
   if (cityName.length > 0) {
@@ -203,6 +217,16 @@ const validateInfo = (system, cityName) => {
     document.getElementById('cityInput').value = '';
   } else {
     errorMessage('Empty Search Field');
+  }
+};
+
+const toggleSystem = () => {
+  const farenheit = document.getElementById('imperialSystem').checked;
+  const cityName = document.getElementById('cityName').innerHTML;
+  if (farenheit) {
+    validateInfo('imperial', cityName);
+  } else {
+    validateInfo('metric', cityName);
   }
 };
 
@@ -219,6 +243,7 @@ const systemSearch = () => {
     validateInfo('imperial', cityName);
   });
 };
+
 
 systemSearch();
 
