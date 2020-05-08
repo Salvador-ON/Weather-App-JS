@@ -50,6 +50,13 @@ const systemSearch = () => {
     validateInfo('metric', cityName);
   });
 
+  document.querySelector('#cityInput').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const cityName = document.getElementById('cityInput').value;
+      validateInfo('metric', cityName);
+    }
+  });
+
   const buttonFarenheit = document.getElementById('farenheit');
   buttonFarenheit.addEventListener('click', () => {
     const cityName = document.getElementById('cityInput').value;
