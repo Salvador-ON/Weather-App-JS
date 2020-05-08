@@ -1,6 +1,6 @@
 # Weather-App-JS
 
-A Simple Weather-App with html and js .
+A Weather App builded using HTML5, CSS3, Javascript. The weather information is retrieved form Open-Weather API 
 
 [Click To Check The Project Details](https://www.theodinproject.com/courses/javascript/lessons/weather-app)
 
@@ -25,17 +25,6 @@ Live version [here](https://salvador-on.github.io/Weather-App-JS/).
 - HTML
 - CSS
 - JavaScript
-
-
-## Done Work
-
-- [x] Build Static Html.
-- [X] Build Program Logic.
-- [X] Request Celsius information.
-- [X] Request Farenheit information. 
-- [X] Display the information.
-- [X] Use webpack.
-- [X] Use ES6.
 
 ## Setup
 
