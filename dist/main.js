@@ -101,6 +101,14 @@ const localTime = (time) => {
     realHour = 24 + realHour;
   }
 
+  if (realHour > 24) {
+    realHour -= 24;
+  }
+
+  if (realHour === 24) {
+    realHour = '00';
+  }
+
   const timeHour = `${realHour}:${hour[1]}`;
   return timeHour;
 };
