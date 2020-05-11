@@ -1,6 +1,6 @@
 # Weather-App-JS
 
-A Weather App builded using HTML5, CSS3, Javascript. The weather information is retrieved form Open-Weather API 
+I built this weather app using HTML5, CSS3, Javascript. The weather information is retrieved form Open-Weather API.
 
 [Click To Check The Project Details](https://www.theodinproject.com/courses/javascript/lessons/weather-app)
 
